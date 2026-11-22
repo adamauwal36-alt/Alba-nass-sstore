@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Alba-nass G Oil</title>
+<style>
+:root{--bg:#fbf8ef;--card:#fff;--tx:#1c2a1f;--mut:#5d6b60;--g:#14532d;--gold:#c9971c;--bd:#e5dfcc;--on:#fff;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e1a12;--card:#16241a;--tx:#f1eddc;--mut:#a9b5a9;--g:#1f7a43;--bd:#2a3b2e}}
+:root[data-theme="dark"]{--bg:#0e1a12;--card:#16241a;--tx:#f1eddc;--mut:#a9b5a9;--g:#1f7a43;--bd:#2a3b2e}
+*{box-sizing:border-box}html{scroll-padding-top:70px}
+body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--g);color:var(--on);display:flex;align-items:center;justify-content:space-between;padding:12px 16px}
+h1,h2{font-family:Georgia,serif;margin:0}
+header h1{font-size:20px}header h1 span{color:#f3cf6b}
+button{font:inherit;cursor:pointer;border:0;border-radius:10px;padding:10px 16px;background:var(--gold);color:#1c1400;font-weight:600}
+button.ghost{background:transparent;color:inherit;border:1px solid var(--bd)}button.sm{padding:6px 10px;font-size:14px}
+.hero{background:var(--g);color:var(--on);text-align:center;padding:36px 16px 44px}
+.hero h2{font-size:34px}.hero h2 span{color:#f3cf6b}.hero p{margin:8px 0 0;opacity:.9}
+main{max-width:900px;margin:0 auto;padding:20px 16px 60px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:16px;overflow:hidden;display:flex;flex-direction:column}
+.card .im{height:200px;display:flex;align-items:center;justify-content:center;background:#fff8e0}
+.card .im img{width:100%;height:100%;object-fit:cover}
+.card .b{padding:14px;display:flex;flex-direction:column;gap:6px;flex:1}
+.pr{font-weight:700;color:var(--g)}.mut{color:var(--mut);font-size:14px}
+.card button{margin-top:auto}
+.why{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin:28px 0}
+.why div{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:12px}
+input,textarea{width:100%;padding:10px;border:1px solid var(--bd);border-radius:10px;background:var(--bg);color:var(--tx);font:inherit;margin:4px 0 10px}
+#drawer{position:fixed;inset:0;background:#0008;z-index:20;display:none;justify-content:flex-end}
+#drawer.o{display:flex}
+#panel{background:var(--card);width:min(420px,100%);height:100%;overflow:auto;padding:16px;padding-top:calc(16px + env(safe-area-inset-top,0px))}
+.row{display:flex;gap:8px;align-items:center;justify-content:space-between;border-bottom:1px solid var(--bd);padding:8px 0}
+.q{display:flex;gap:6px;align-items:center}
+#admin{display:none;background:var(--card);border:2px solid var(--gold);border-radius:16px;padding:16px;margin-bottom:24px}
+#admin.o{display:block}
+footer{text-align:center;color:var(--mut);padding:20px;font-size:14px}
+.thumb{width:44px;height:44px;border-radius:8px;object-fit:cover}
+</style></head><body>
+<header><h1>Alba-nass <span>G Oil</span></h1><button id="cb">🛒 Cart (<span id="cn">0</span>)</button></header>
+<section class="hero"><h2>Alba-nass <span>G Oil</span></h2><p>Pure goodness, naturally · 100% pure groundnut oil</p></section>
+<main>
+<section id="login" style="display:none;margin-bottom:24px"><h2>Admin login</h2>
+<input id="le" type="email" placeholder="Admin email" autocomplete="username"><input id="lp" type="password" placeholder="Password" autocomplete="current-password">
+<button id="li">Log in</button> <span id="lm" class="mut"></span></section>
+<section id="admin"><h2>Admin dashboard</h2>
+<p class="mut">Only you can see this. Add products and upload pictures from your device.</p>
+<input id="an" placeholder="Product name"><input id="as" placeholder="Size (e.g. 1 Litre)">
+<input id="ap" type="number" min="0" placeholder="Price in ₦ (optional)"><textarea id="ad" rows="2" placeholder="Description"></textarea>
+<input id="af" type="file" accept="image/*"><button id="aa">Add product</button> <span id="am" class="mut"></span>
+<button class="ghost sm" id="lo" style="float:right">Log out</button><h3>Your products</h3><div id="al"></div></section>
+<h2 id="products">Our products</h2><p class="mut" id="load"></p>
+<div class="grid" id="grid"></div>
+<div class="why"><div><b>100% pure</b><br><span class="mut">No additives, no preservatives.</span></div><div><b>Healthy choice</b><br><span class="mut">Rich in natural vitamin E and good fats.</span></div><div><b>Natural &amp; fresh</b><br><span class="mut">Extracted from the finest groundnuts.</span></div><div><b>Trusted quality</b><br><span class="mut">Hygienically processed for your family.</span></div></div>
+</main>
+<footer>© Alba-nass G Oil · Proudly made for Africa · Orders via WhatsApp · <a href="#" id="lg" style="color:inherit">Admin</a></footer>
+<div id="drawer"><div id="panel"><div class="row" style="border:0"><h2>Your cart</h2><button class="ghost sm" id="cx">Close</button></div>
+<div id="items"></div><div id="tot" class="pr" style="margin:12px 0"></div>
+<div id="form"><input id="cname" placeholder="Your name"><input id="cph" type="tel" placeholder="Your phone number"><textarea id="cad" rows="2" placeholder="Delivery address"></textarea>
+<button id="co" style="width:100%">Order on WhatsApp</button></div></div></div>
+<script type="module">
+import{initializeApp}from"https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import{getAuth,signInWithEmailAndPassword,signOut,onAuthStateChanged}from"https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import{getFirestore,collection,doc,addDoc,deleteDoc,onSnapshot,query,orderBy}from"https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+// 1) Paste YOUR Firebase web-app config here
+const firebaseConfig={apiKey:"AIzaSyDqCR6ZnAAQYiWr_HCmt3C-evhCwuuQh-A",authDomain:"alba--nass-g-oil.firebaseapp.com",projectId:"alba--nass-g-oil",appId:"1:867750240207:web:45c3853268c6d58009fcba"};
+// 2) Paste the admin user's UID (Firebase Console > Authentication > Users)
+const ADMIN_UID="socRuzq6AJbzjmahE5dosRaYxXK2";
+const fb=initializeApp(firebaseConfig),auth=getAuth(fb),db=getFirestore(fb);
+const WA="2349041239744";
+const DEF=[{id:"d1",name:"Alba-nass G Oil",size:"1 Litre",desc:"100% pure groundnut oil.",price:null,img:""},{id:"d2",name:"Alba-nass G Oil",size:"500ml",desc:"100% pure groundnut oil.",price:null,img:""}];
+let products=DEF,cart={},admin=false,custom=[];
+const $=s=>document.querySelector(s);
+try{cart=JSON.parse(localStorage.getItem("alba_cart")||"{}")||{}}catch(e){cart={}}
+const save=()=>{try{localStorage.setItem("alba_cart",JSON.stringify(cart))}catch(e){}};
+const esc=s=>String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const money=p=>p==null||p===""?"Price on WhatsApp":"₦"+Number(p).toLocaleString();
+const okImg=s=>typeof s==="string"&&/^data:image\/(jpeg|png|webp);base64,/.test(s);
+const bottle='<svg viewBox="0 0 60 120" width="90" aria-hidden="true"><rect x="22" y="2" width="16" height="12" rx="3" fill="#d9a521"/><path d="M20 14h20l8 22v70a8 8 0 0 1-8 8H20a8 8 0 0 1-8-8V36z" fill="#f0b81c" opacity=".9"/><rect x="12" y="52" width="36" height="36" rx="4" fill="#14532d"/><rect x="15" y="55" width="30" height="30" rx="3" fill="#fbf8ef"/></svg>';
+const find=id=>products.find(p=>p.id===id);
+function render(){
+  $("#grid").innerHTML=products.map(p=>`<div class="card"><div class="im">${okImg(p.img)?`<img src="${p.img}" alt="${esc(p.name)}">`:bottle}</div><div class="b"><b>${esc(p.name)}</b><span class="mut">${esc(p.size)}</span><span class="mut">${esc(p.desc)}</span><span class="pr">${money(p.price)}</span><button data-add="${esc(p.id)}">Add to cart</button></div></div>`).join("");
+  $("#al").innerHTML=custom.length?custom.map(p=>`<div class="row"><span style="display:flex;gap:8px;align-items:center">${okImg(p.img)?`<img class="thumb" src="${p.img}" alt="">`:""}${esc(p.name)} ${esc(p.size)}</span><button class="ghost sm" data-del="${esc(p.id)}">Delete</button></div>`).join(""):'<p class="mut">No custom products yet.</p>';
+  cartUI();
+}
+function cartUI(){
+  const ids=Object.keys(cart).filter(i=>find(i)&&cart[i]>0);
+  $("#cn").textContent=ids.reduce((a,i)=>a+cart[i],0);
+  $("#items").innerHTML=ids.length?ids.map(i=>{const p=find(i);return `<div class="row"><span>${esc(p.name)}<br><span class="mut">${esc(p.size)} · ${money(p.price)}</span></span><span class="q"><button class="sm ghost" data-m="${esc(i)}">−</button><b>${cart[i]}</b><button class="sm ghost" data-p="${esc(i)}">+</button></span></div>`}).join(""):'<p class="mut">Your cart is empty.</p>';
+  const priced=ids.every(i=>find(i).price!=null&&find(i).price!=="");
+  $("#tot").textContent=ids.length&&priced?"Total: ₦"+ids.reduce((a,i)=>a+cart[i]*find(i).price,0).toLocaleString():"";
+  $("#form").style.display=ids.length?"block":"none";
+}
+document.addEventListener("click",e=>{
+  const t=e.target.closest("button");if(!t)return;
+  const d=t.dataset;
+  if(d.add){cart[d.add]=(cart[d.add]||0)+1;save();cartUI();t.textContent="Added ✓";setTimeout(()=>t.textContent="Add to cart",900)}
+  else if(d.p){cart[d.p]++;save();cartUI()}
+  else if(d.m){cart[d.m]--;if(cart[d.m]<=0)delete cart[d.m];save();cartUI()}
+  else if(d.del){deleteDoc(doc(db,"products",d.del)).catch(()=>alert("Could not delete."))}
+});
+$("#cb").onclick=()=>$("#drawer").classList.add("o");
+$("#cx").onclick=()=>$("#drawer").classList.remove("o");
+$("#co").onclick=()=>{
+  const n=$("#cname").value.trim(),ph=$("#cph").value.trim(),ad=$("#cad").value.trim();
+  if(!n||!ph||!ad){alert("Please fill in your name, phone and address.");return}
+  const ids=Object.keys(cart).filter(i=>find(i)&&cart[i]>0);if(!ids.length)return;
+  let m="Hello Alba-nass G Oil, I would like to order:\n";
+  ids.forEach(i=>{const p=find(i);m+=`- ${cart[i]} x ${p.name} (${p.size})${p.price!=null&&p.price!==""?" – ₦"+(cart[i]*p.price).toLocaleString():""}\n`});
+  if($("#tot").textContent)m+=$("#tot").textContent+"\n";
+  m+=`\nName: ${n}\nPhone: ${ph}\nAddress: ${ad}`;
+  window.open("https://wa.me/"+WA+"?text="+encodeURIComponent(m),"_blank");
+};
+function shrink(file){return new Promise((res,rej)=>{const r=new FileReader();r.onerror=rej;r.onload=()=>{const im=new Image();im.onerror=rej;im.onload=()=>{const s=Math.min(1,520/Math.max(im.width,im.height)),c=document.createElement("canvas");c.width=im.width*s;c.height=im.height*s;c.getContext("2d").drawImage(im,0,0,c.width,c.height);res(c.toDataURL("image/jpeg",.78))};im.src=r.result};r.readAsDataURL(file)})}
+$("#aa").onclick=async()=>{
+  if(!admin)return;
+  const name=$("#an").value.trim(),size=$("#as").value.trim(),f=$("#af").files[0];
+  if(!name||!size){$("#am").textContent="Enter name and size.";return}
+  $("#am").textContent="Saving…";
+  try{
+    const img=f?await shrink(f):"";const pr=$("#ap").value;
+    const id="p"+Date.now();
+    await addDoc(collection(db,"products"),{name,size,desc:$("#ad").value.trim(),price:pr===""?null:Number(pr),img,ts:Date.now()});
+    ["an","as","ap","ad","af"].forEach(k=>$("#"+k).value="");$("#am").textContent="Added ✓";
+  }catch(e){$("#am").textContent="Could not save. Only the admin can add products."}
+};
+render();
+onSnapshot(query(collection(db,"products"),orderBy("ts")),sn=>{
+  custom=sn.docs.map(d=>Object.assign({id:d.id},d.data()));
+  products=custom.length?custom:DEF;render();
+},()=>{});
+onAuthStateChanged(auth,u=>{
+  admin=!!u&&u.uid===ADMIN_UID;
+  $("#admin").classList.toggle("o",admin);$("#login").style.display="none";
+  $("#lg").style.display=admin?"none":"inline";
+});
+$("#lg").onclick=e=>{e.preventDefault();$("#login").style.display="block"};
+$("#li").onclick=async()=>{
+  try{await signInWithEmailAndPassword(auth,$("#le").value.trim(),$("#lp").value)}
+  catch(e){$("#lm").textContent="Login failed."}
+};
+$("#lo").onclick=()=>signOut(auth);
+</script></body></html>
